@@ -3,6 +3,7 @@
 module top (
   input logic clk,
   input logic [1:0] buttons,
+
   output logic [5:0] leds
 );
 

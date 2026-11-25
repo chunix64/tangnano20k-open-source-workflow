@@ -124,6 +124,7 @@ _place-and-route ARGS="":
         --json {{synth_json}} \
         --write {{pnr_json}} \
         --report {{report_json}} \
+        --detailed-timing-report \
         {{ARGS}}
 
 place-and-route: synthesis
