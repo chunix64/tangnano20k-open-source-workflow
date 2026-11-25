@@ -1,20 +1,20 @@
 `default_nettype none
 
 module top (
-  input clk,
-  input [1:0] buttons,
-  output [5:0] leds
+  input logic clk,
+  input logic [1:0] buttons,
+  output logic [5:0] leds
 );
 
-  localparam COUNTER_INTERVAL_MS = 100;
-  localparam COUNTER_INTERVAL = COUNTER_INTERVAL_MS * 27_000;
+  localparam int unsigned COUNTER_INTERVAL_MS = 100;
+  localparam int unsigned COUNTER_INTERVAL = COUNTER_INTERVAL_MS * 27_000;
 
-  reg [24:0] counter;
-  reg counter_flag;
+  logic [24:0] counter = '0;
+  logic counter_flag = 1'b0;
 
-  always @(posedge clk) begin
+  always_ff @(posedge clk) begin
     if (counter > COUNTER_INTERVAL - 1) begin
-      counter <= 25'b0;
+      counter <= '0;
       counter_flag <= 1'b1;
     end
     else begin
@@ -23,7 +23,7 @@ module top (
     end
   end
 
-  always @(posedge clk) begin 
+  always_ff @(posedge clk) begin 
     if (counter_flag) begin
       leds[0] <= ~leds[0];
     end
